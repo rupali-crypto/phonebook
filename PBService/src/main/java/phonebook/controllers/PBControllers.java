@@ -3,22 +3,28 @@ package phonebook.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
+
+import phonebook.Exceptions.ContactNotFoundException;
+import phonebook.Exceptions.UserNotFoundException;
 import phonebook.config.SwaggerConfig;
 import phonebook.repositories.ContactRepository;
 import phonebook.users.Users;
-
-@RequestMapping("/phonebook/api")
 @RestController
+@RequestMapping("/phonebook/api")
+@Validated
 public class PBControllers {
 
 	@Autowired
 	ContactRepository repository;
+
 
 	@RequestMapping(value = "/hello",method=RequestMethod.GET)
 	
@@ -37,15 +43,15 @@ public class PBControllers {
 	}
 
 	@RequestMapping(value = "/GetContact", method = RequestMethod.GET, params = { "contactnumber" },name = "Get a contact")
-	public Users getUser(@RequestParam(value = "contactnumber") String ContactNumber) {
+	ResponseEntity<Users> getUser(@RequestParam(value = "contactnumber") String ContactNumber) {
 		Users user = new Users();
 		
-		Optional<Users> optionalUser = repository.findById(Integer.parseInt(ContactNumber));
-		if (optionalUser.isPresent()) {
-			user = optionalUser.get();
-
-		}
-		return user;
+		user= repository.findById(Integer.parseInt(ContactNumber))
+		
+		.orElseThrow(()-> new ContactNotFoundException("User not found with this contact number: "+ContactNumber));
+        
+        return ResponseEntity.ok().body(user);
+		
 	}
 
 	@RequestMapping(value = "/AddContact", method = RequestMethod.POST)
@@ -60,13 +66,11 @@ public class PBControllers {
 	@RequestMapping(value = "/DeleteContact", method = RequestMethod.DELETE)
 	public Users DeleteContact(@RequestParam(value = "Id") Integer Id) {
 		Users usertoDelete = new Users();
-		Optional<Users> optionalUser = repository.findById(Id);
-		if (optionalUser.isPresent()) {
-			usertoDelete = optionalUser.get();
+		usertoDelete= repository.findById(Id).orElseThrow(()-> new UserNotFoundException("User not found with this Id: "+Id));
+	
 			repository.deleteById(usertoDelete.getId());
 
-		}
-		return usertoDelete;
+			return usertoDelete;
 	}
 
 	@RequestMapping(value = "/EditContact", method = RequestMethod.PUT)
@@ -75,9 +79,9 @@ public class PBControllers {
 			@RequestParam(value = "lastname", required = false) String LastName,
 			@RequestParam(value = "contactnumber", required = false) String ContactNumber) {
 		Users usertoEdit = new Users();
-		Optional<Users> optionalUser = repository.findById(Id);
-		if (optionalUser.isPresent()) {
-			usertoEdit = optionalUser.get();
+		usertoEdit = repository.findById(Id).orElseThrow(()-> new UserNotFoundException("User not found with this Id: "+Id));
+	
+			
 			if (Name != null && usertoEdit.getName() != Name) {
 
 				usertoEdit.setName(Name);
@@ -91,7 +95,7 @@ public class PBControllers {
 				usertoEdit.setContactNumber(ContactNumber);
 			}
 			repository.save(usertoEdit);
-		}
+		
 
 		return usertoEdit;
 
