@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 
 public class SwaggerConfig {
-	public static final String PB_TAG = "Phonebook service";
+	
 	@Bean
 	public Docket swaggerApi() {
 		
@@ -23,8 +23,8 @@ public class SwaggerConfig {
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("phonebook.controllers"))
 				.paths(PathSelectors.ant("phonebook/api/*"))
-				.build()
-				.tags(new Tag(PB_TAG, "the phonebook API with description api tag"));
+				.build();
+				
 	}
 
 }
