@@ -1,0 +1,6 @@
+2021-10-31 05:23:37,208 [main] TRACE org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Could not find key 'spring.liveBeansView.mbeanDomain' in any property source
+2021-10-31 05:23:37,213 [main] INFO  phonebook.Application - Started Application in 11.57 seconds (JVM running for 12.416)
+2021-10-31 05:23:37,215 [main] TRACE org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'applicationAvailability'
+2021-10-31 05:23:37,216 [main] DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean - Application availability state LivenessState changed to CORRECT
+2021-10-31 05:23:37,224 [main] TRACE org.springframework.beans.factory.support.DefaultListableBeanFactory - Returning cached instance of singleton bean 'applicationAvailability'
+2021-10-31 05:23:37,224 [main] DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
