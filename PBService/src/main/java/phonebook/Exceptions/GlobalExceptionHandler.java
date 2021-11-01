@@ -37,10 +37,13 @@ public class GlobalExceptionHandler {
 		public ResponseEntity<?>handleGlobalException(Exception exception,WebRequest request)
 
 		{
-
-			ErrorDetails errordetails=new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
+			String error;
+			if(exception.getMessage().contains("Error while committing the transaction"))
+					 error="Please enter valid contact number";
+			else
+				error=exception.getMessage();
+			ErrorDetails errordetails=new ErrorDetails(new Date(), error, request.getDescription(false));
 			return new ResponseEntity(errordetails,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
-
+		
 }
