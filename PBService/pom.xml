@@ -82,7 +82,7 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-<packaging>war</packaging>
+<packaging>jar</packaging>
 	<build>
 		<plugins>
 		
