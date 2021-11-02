@@ -10,7 +10,7 @@ This is a Spring Boot project built with Maven 3.3 and Java 11. So, after you cl
 * Build the project with `mvn install` and then run it as a packaged application with `java -jar target/PhoneBookService-0.0.1-SNAPSHOT.jar.
 * Load the project on your favourite IDE and run it from there. For Eclipse, this would be `mvn install eclipse:eclipse` to build the project, Import -> Existing Projects into Workspace and finally Run as Java Application on the Application.java file.
 
-##Simplest way to run
+**##Simplest way to run**
 Install jdk and maven
 Set environment variables
 Run package jar file: PhoneBookService-0.0.1-SNAPSHOT.jar
