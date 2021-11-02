@@ -68,7 +68,7 @@ public class PBControllers implements Serializable {
 	}
 
 	@PostMapping("/create-contact")
-	public Users createEmployee(@Valid @RequestBody Users newUser) {
+	public Users createUser(@Valid @RequestBody Users newUser) {
 
 		Users savedUser = repository.save(newUser);
 
