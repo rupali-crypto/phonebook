@@ -1,6 +1,6 @@
 # Phone Book Service
 
-An implementation of a RESTful Web Service using Spring Boot, Java 11, Swagger-OAS3 and Postgresql Database.
+An implementation of a RESTful api Service using Spring Boot, Java 11, Swagger-OAS3 and Postgresql Database.
 
 ## How to run the service
 
